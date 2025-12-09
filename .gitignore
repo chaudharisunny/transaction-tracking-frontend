@@ -24,6 +24,3 @@ dist-ssr
 *.sw?
 
 
-vite.config.js 
-package.json 
-index.html 
