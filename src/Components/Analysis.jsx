@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PiChart from "./PiChart";
-import api from "../api";
+import api from "../utils/api";
 
 function Analysis() {
   const [summary, setSummary] = useState({

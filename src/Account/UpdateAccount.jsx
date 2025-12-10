@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../api";
+import api from "../utils/api";
 
 const UpdateAccount = () => {
   const { id } = useParams();

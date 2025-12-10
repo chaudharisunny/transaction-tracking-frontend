@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
+import api from "../utils/api";
 
 function AddAccount() {
   const [form, setForm] = useState({

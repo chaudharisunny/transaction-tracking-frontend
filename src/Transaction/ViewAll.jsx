@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import api from '../utils/api';
 
 function ViewAll() {
   const [transactions, setTransactions] = useState([]);
