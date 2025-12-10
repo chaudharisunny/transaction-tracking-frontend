@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 
 function AddTransaction() {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ function AddTransaction() {
 
   const fetchAccounts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/allaccount", {
+      const res = await api.get("/allaccount", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -49,7 +49,7 @@ function AddTransaction() {
     }
 
     try {
-      await axios.post("http://localhost:3000/addTransaction", formData, {
+      await api.post("/addTransaction", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import api from '../api';
 
 function UpdateTransaction() {
   const { id } = useParams();
@@ -21,7 +21,7 @@ function UpdateTransaction() {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/allTransaction`);
+        const res = await api.get(`/allTransaction`);
         const transaction = res.data.transactions.find(t => t._id === id);
         if (transaction) {
           setFormData(transaction);
@@ -44,7 +44,7 @@ function UpdateTransaction() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/updateTransaction/${id}`, formData);
+      await api.put(`/updateTransaction/${id}`, formData);
       alert("Transaction updated successfully!");
       navigate('/view-all'); // or your route for viewing transactions
     } catch (error) {

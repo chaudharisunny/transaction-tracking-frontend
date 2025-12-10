@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 function ViewAll() {
   const [transactions, setTransactions] = useState([]);
@@ -19,7 +19,7 @@ function ViewAll() {
           return;
         }
 
-        const res = await axios.get("http://localhost:3000/transaction/all", {
+        const res = await api.get("/transaction/all", {
   headers: { Authorization: `Bearer ${token}` }
 });
 
@@ -41,7 +41,7 @@ function ViewAll() {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:3000/deleteTransaction/${id}`, {
+      await api.delete(`/deleteTransaction/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

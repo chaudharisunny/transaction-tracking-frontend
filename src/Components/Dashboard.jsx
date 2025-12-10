@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api";
 
 function Dashboard() {
  
@@ -17,7 +17,7 @@ function Dashboard() {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/transaction/all", {
+      const res = await api.get("/transaction/all", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

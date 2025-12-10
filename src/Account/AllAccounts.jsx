@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../api";
 
 function AllAccounts() {
   const [accounts, setAccounts] = useState([]);
@@ -8,7 +8,7 @@ function AllAccounts() {
   // Fetch all accounts
   const fetchAccounts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/allaccount", {
+      const res = await api.get("/allaccount", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -29,7 +29,7 @@ function AllAccounts() {
     if (!window.confirm("Are you sure you want to delete this account?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/deleteaccount/${id}`, {
+      await api.delete(`/deleteaccount/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

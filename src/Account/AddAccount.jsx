@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 function AddAccount() {
   const [form, setForm] = useState({
@@ -25,8 +25,8 @@ function AddAccount() {
     }
 
     try {
-        await axios.post(
-        "http://localhost:3000/newaccount",
+        await api.post(
+        "/newaccount",
         form,
         {
           headers: {
