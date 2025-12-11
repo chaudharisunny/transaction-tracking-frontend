@@ -12,4 +12,8 @@ export default defineConfig({
     },
   },
   plugins: [react(),tailwindcss()],
+  build: {
+    chunkSizeWarningLimit: 1600, // increase limit (default is 500kb)
+  }
 })
+
