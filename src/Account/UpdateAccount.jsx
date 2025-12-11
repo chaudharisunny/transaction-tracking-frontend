@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
+import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import api from "../utils/api";
 
 const UpdateAccount = () => {
   const { id } = useParams();
@@ -15,8 +15,8 @@ const UpdateAccount = () => {
   // Fetch old account data
   const fetchAccount = useCallback(async () => {
     try {
-      const res = await api.get(
-        `/geteditacc/${id}`,
+      const res = await axios.get(
+        `http://localhost:3000/geteditacc/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,8 +43,8 @@ const UpdateAccount = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await api.put(
-        `/updateaccount/${id}`,
+      await axios.put(
+        `http://localhost:3000/updateaccount/${id}`,
         formData,
         {
           headers: {

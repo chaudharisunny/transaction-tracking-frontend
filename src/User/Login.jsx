@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
+import axios from 'axios'
 function Login() {
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault();
     try {
       // Replace with your actual axios call
-      const response = await api.post('/login', formData);
+      const response = await axios.post('http://localhost:3000/login', formData);
   
       
       // Save token and user to localStorage
