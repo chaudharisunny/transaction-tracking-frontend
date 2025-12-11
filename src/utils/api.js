@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // Must end WITHOUT trailing slash
-  withCredentials: true, // Important for CORS + cookies/auth
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
+
 
 // Attach token automatically to every request
 api.interceptors.request.use(config => {
