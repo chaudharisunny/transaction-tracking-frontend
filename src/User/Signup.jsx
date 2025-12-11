@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ function Signup() {
       data.append('password', formData.password);
       data.append('image', formData.image);
 
-      await axios.post('http://localhost:3000/register', data);
+      await api.post('/register', data);
       alert('Signup successful!');
 
       navigate('/dashboard'); // <-- redirect after successful signup
