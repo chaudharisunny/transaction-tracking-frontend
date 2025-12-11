@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { FaTrash, FaEdit } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
+import React, { useEffect, useState } from "react";
+import { FaTrash, FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api"; // Make sure this is your Axios instance
 
 function ViewAll() {
   const [transactions, setTransactions] = useState([]);
@@ -11,21 +11,18 @@ function ViewAll() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const token = localStorage.getItem("token");
         const user = JSON.parse(localStorage.getItem("user"));
-
         if (!user) {
           alert("User not logged in");
+          navigate("/login");
           return;
         }
 
-        const res = await api.get("/transaction/all", {
-  headers: { Authorization: `Bearer ${token}` }
-});
-
+        // Axios interceptor will attach token automatically
+        const res = await api.get("/transaction/all");
         setTransactions(res.data.data || []);
       } catch (error) {
-        console.error("Error fetching transactions:", error.message);
+        console.error("Error fetching transactions:", error);
         alert("Failed to load transactions");
       } finally {
         setLoading(false);
@@ -33,21 +30,16 @@ function ViewAll() {
     };
 
     fetchTransactions();
-  }, []);
+  }, [navigate]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this transaction?")) return;
 
     try {
-      const token = localStorage.getItem("token");
-
-      await api.delete(`/deleteTransaction/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      await api.delete(`/deleteTransaction/${id}`);
       setTransactions((prev) => prev.filter((txn) => txn._id !== id));
     } catch (error) {
-      console.error("Error deleting transaction:", error.message);
+      console.error("Error deleting transaction:", error);
       alert("Failed to delete transaction");
     }
   };
@@ -80,7 +72,9 @@ function ViewAll() {
           {transactions.length > 0 ? (
             transactions.map((tx) => (
               <tr key={tx._id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-3">{tx.date?.slice(0, 10)}</td>
+                <td className="px-4 py-3">
+                  {tx.date ? new Date(tx.date).toLocaleDateString() : "-"}
+                </td>
                 <td className="px-4 py-3">{tx.item}</td>
                 <td className="px-4 py-3">{tx.payment}</td>
                 <td className="px-4 py-3">{tx.category}</td>
